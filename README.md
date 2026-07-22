@@ -1,2 +1,160 @@
-# Sack-Price
-Sack prices
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bag Cost Calculator</title>
+
+<style>
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f2f2f2;
+    margin:20px;
+}
+
+.container{
+    max-width:500px;
+    margin:auto;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,.2);
+}
+
+h2{
+    text-align:center;
+    color:#004d99;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#004d99;
+    color:white;
+    padding:10px;
+}
+
+td{
+    border:1px solid #ddd;
+    padding:8px;
+    text-align:center;
+}
+
+input{
+    width:80px;
+    text-align:center;
+    font-size:16px;
+}
+
+.total{
+    font-size:22px;
+    font-weight:bold;
+    color:green;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:#004d99;
+    color:white;
+    font-size:18px;
+    border:none;
+    border-radius:8px;
+    margin-top:15px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Lela Sacks Cost Calculator</h2>
+
+<table>
+
+<tr>
+<th>Material</th>
+<th>Rate</th>
+<th>Weight(g)</th>
+<th>Price</th>
+</tr>
+
+<tr>
+<td>PP</td>
+<td><input id="ppRate" value="3700"></td>
+<td><input id="ppWt" value="120"></td>
+<td id="ppPrice">444</td>
+</tr>
+
+<tr>
+<td>BOPP Front</td>
+<td><input id="bfRate" value="9500"></td>
+<td><input id="bfWt" value="10"></td>
+<td id="bfPrice">95</td>
+</tr>
+
+<tr>
+<td>BOPP Back</td>
+<td><input id="bbRate" value="9500"></td>
+<td><input id="bbWt" value="10"></td>
+<td id="bbPrice">95</td>
+</tr>
+
+<tr>
+<td colspan="3"><b>Price / Bag</b></td>
+<td class="total" id="bagPrice">634</td>
+</tr>
+
+<tr>
+<td colspan="3"><b>Price / Bale (500)</b></td>
+<td class="total" id="balePrice">317000</td>
+</tr>
+
+</table>
+
+<button onclick="calculate()">Calculate</button>
+
+</div>
+
+<script>
+
+function calculate(){
+
+let ppRate=parseFloat(document.getElementById("ppRate").value)||0;
+let ppWt=parseFloat(document.getElementById("ppWt").value)||0;
+
+let bfRate=parseFloat(document.getElementById("bfRate").value)||0;
+let bfWt=parseFloat(document.getElementById("bfWt").value)||0;
+
+let bbRate=parseFloat(document.getElementById("bbRate").value)||0;
+let bbWt=parseFloat(document.getElementById("bbWt").value)||0;
+
+let pp=(ppRate*ppWt)/1000;
+let bf=(bfRate*bfWt)/1000;
+let bb=(bbRate*bbWt)/1000;
+
+document.getElementById("ppPrice").innerHTML=pp.toFixed(2);
+document.getElementById("bfPrice").innerHTML=bf.toFixed(2);
+document.getElementById("bbPrice").innerHTML=bb.toFixed(2);
+
+let bag=pp+bf+bb;
+let bale=bag*500;
+
+document.getElementById("bagPrice").innerHTML=bag.toFixed(2);
+document.getElementById("balePrice").innerHTML=bale.toLocaleString();
+
+}
+
+calculate();
+
+</script>
+
+</body>
+</html>
